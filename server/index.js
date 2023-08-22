@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost:5000/memoriesDB", {
+mongoose.connect("mongodb://localhost:5174/memoriesDB", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false
