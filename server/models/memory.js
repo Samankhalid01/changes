@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const memorySchema = new mongoose.Schema({
-  title: String,
-  description: String,
+  nam: String,
+  time: String,
+  memory: String,
   createdAt: { type: Date, default: Date.now },
 });
 

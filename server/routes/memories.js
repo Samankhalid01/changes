@@ -6,10 +6,10 @@ const router = express.Router();
 // Create
 router.post("/", async (req, res) => {
   try {
-    const { title, description } = req.body;
-    const newMemory = new Memory({ title, description });
+    const { nam, time, memory } = req.body;
+    const newMemory = new Memory({ nam, time, memory });
     await newMemory.save();
-    res.status(201).json(newMemory);
+    res.status(201).json({ newMemory });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
   }
