@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import memoriesRoutes from "./routes/memories"; // Import your routes
+import memoriesRoutes from "./routes/memories"; 
 
 
 const app = express();
