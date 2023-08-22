@@ -17,7 +17,7 @@ app.use(cors(corsOptions));
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:27017/memories")
+  .connect("mongodb+srv://samankhalid0001:MONGO@cluster0.nl9fso8.mongodb.net/memories_project")
   .then(() => {
     console.log("Connected to MongoDB");
   })

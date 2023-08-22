@@ -7,8 +7,12 @@ const router = express.Router();
 router.post("/", async (req, res) => {
   try {
     const { nam, time, memory } = req.body;
-    const newMemory = new Memory({ nam, time, memory });
-    await newMemory.save();
+    console.log("Name:", nam);
+console.log("Time:", time);
+console.log("Memory:", memory);
+  const newMemory =await  Memory.create({nam,time,memory});
+    // const newMemory = new Memory({ nam, time, memory });
+    // await newMemory.save();
     res.status(201).json({ newMemory });
   } catch (error) {
     res.status(500).json({ message: "Server error" });
