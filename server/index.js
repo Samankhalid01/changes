@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import memoriesRoutes from "./routes/memories.js"; // Import your routes
+import memoriesRoutes from "./routes/memories.js";
+import Memory from "./models/memory.js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -12,11 +13,7 @@ app.use(cors());
 
 // Connect to MongoDB
 mongoose
-  .connect("mongodb://localhost:5174/memoriesDB", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
+  .connect("mongodb://localhost:27017/memories")
   .then(() => {
     console.log("Connected to MongoDB");
   })
