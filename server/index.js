@@ -1,34 +1,42 @@
 import express from "express";
-import bodyParser from "body-parser";
-import cors from "cors";
 import mongoose from "mongoose";
+import cors from "cors";
+import memoriesRoutes from "./routes/memories.js"; // Import your routes
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
-// API route
-app.get("/api", (req, res) => {
-  res.json({ users: ["userOne", "userTwo", "userThree"] });
+// Connect to MongoDB
+mongoose
+  .connect("mongodb://localhost:5000/memoriesDB", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((error) => {
+    console.error("Error connecting to MongoDB:", error);
+  });
+
+// API route to get memories
+app.get("/api/memories", async (req, res) => {
+  try {
+    const memories = await Memory.find();
+    res.json(memories);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 });
 
-export const connection = async () => {
-  try {
-    const conc = await mongoose.connect("mongodb://localhost:27017/memories", {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log("<--- Connection Establised Successfully --->");
-  } catch (error) {
-    console.log("Error ", error.message);
-  }
-};
+// Use the memoriesRoutes
+app.use("/api/memories", memoriesRoutes);
 
-connection();
-// ider chala rhi hun  server
-const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`Server started on port ${5000}`);
+  console.log(`Server started on port ${PORT}`);
 });
